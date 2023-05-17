@@ -3,7 +3,6 @@ package main.java.jdr299zdh5cew256ans96.assembly;
 import java.util.ArrayList;
 
 public abstract class Operand {
-	// TODO: do we still need this?
 	public ArrayList<Register> getAbstractTemps() {
 		return new ArrayList<>();
 	}

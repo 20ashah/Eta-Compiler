@@ -88,16 +88,6 @@ public abstract class Instruction {
       return false;
     }
 
-//    System.out.println("IN");
-//    for (String s : in) {
-//      System.out.println(s);
-//    }
-//
-//    System.out.println("SET IN");
-//    for (String s : useSet) {
-//      System.out.println(s);
-//    }
-
     setIn(useSet);
     return true;
 
@@ -108,20 +98,6 @@ public abstract class Instruction {
       for (Instruction insn : successors) {
         union.addAll(insn.getIn());
       }
-//
-//      if (out.containsAll(union)) {
-//        return false;
-//      }
-
-//    System.out.println("OUT");
-//    for (String s : out) {
-//      System.out.println(s);
-//    }
-//
-//    System.out.println("SET OUT");
-//    for (String s : union) {
-//      System.out.println(s);
-//    }
 
       setOut(union);
       return true;

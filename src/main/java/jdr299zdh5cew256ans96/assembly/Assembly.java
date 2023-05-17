@@ -22,7 +22,6 @@ import java.util.LinkedHashSet;
 
 public class Assembly {
 
-	// master list of x86 instructions prioritized by tile size
 	public static LinkedHashSet<Tile> insnList = new LinkedHashSet<>(
 			Arrays.asList(
 					new MoveMemTempToMemTempTile(),
@@ -43,20 +42,20 @@ public class Assembly {
 	);
 	public static LinkedHashSet<String> x86regs = new LinkedHashSet<>(
 			Arrays.asList(
-					"rax", "eax", "ax", "al",   // accumulator
-					"rbx", "ebx", "bx", "bl",   // base
-					"rcx", "ecx", "cx", "cl",   // counter
-					"rdx", "edx", "dx", "dl",   // data
-					"rsp", "esp", "sp", "spl",  // stack pointer
-					"rbp", "ebp", "bp", "bpl",  // base pointer
-					"rsi", "esi", "si", "sil",  // source
-					"rdi", "edi", "di", "dil",  // destination
+					"rax", "eax", "ax", "al",
+					"rbx", "ebx", "bx", "bl",
+					"rcx", "ecx", "cx", "cl",
+					"rdx", "edx", "dx", "dl",
+					"rsp", "esp", "sp", "spl",
+					"rbp", "ebp", "bp", "bpl",
+					"rsi", "esi", "si", "sil",
+					"rdi", "edi", "di", "dil",
 					"r8", "r9", "r10", "r11",
 					"r12", "r13", "r14", "r15",
 					"rip"
 			)
 	);
-	private ArrayList<Instruction> insns; // x86 instructions to be added for
+	private ArrayList<Instruction> insns;
 	private String shuttleTemp;
 	private static int shuttleTempNum;
 	private static int freshLabel;
@@ -121,9 +120,8 @@ public class Assembly {
 		return assembly;
 	}
 
-	// test if operand is a number
 	public static boolean isNumeric(String str) {
-		return str.matches("-?\\d+(\\.\\d+)?");  //match a number with optional '-' and decimal.
+		return str.matches("-?\\d+(\\.\\d+)?");
 	}
 
 }

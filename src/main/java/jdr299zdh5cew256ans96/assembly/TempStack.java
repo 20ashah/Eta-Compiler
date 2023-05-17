@@ -25,14 +25,10 @@ public abstract class TempStack {
       return -1;
     }
 
-    // size returns a sort of inverse index (ie: top of
-    // stack always has index 1)
     return tempsOnStack.size() - index + 1;
 
   }
 
-  // can access things on stack through memory, as this
-  // stack is just a representation
 
   public static boolean isEmpty() {
     return tempsOnStack.isEmpty();

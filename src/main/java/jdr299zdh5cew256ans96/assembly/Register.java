@@ -59,7 +59,6 @@ public class Register extends Operand {
 	public ArrayList<Register> getPrecoloredTemps() {
 		ArrayList<Register> precoloredTemps = new ArrayList<>();
 		if (isMachineReg()) {
-//			System.out.println("isMachineReg() "+reg);
 			precoloredTemps.add(this);
 		}
 		return precoloredTemps;

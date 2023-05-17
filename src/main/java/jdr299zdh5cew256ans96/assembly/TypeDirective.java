@@ -8,11 +8,11 @@ public class TypeDirective extends Directive {
 
     @Override
     public String toString() {
-        // function case
+
         if (directive.contains("_I")) {
             return ".type "+directive+", @function";
         }
-        // global data case
+
         return ".type "+directive+", @object";
     }
 }
