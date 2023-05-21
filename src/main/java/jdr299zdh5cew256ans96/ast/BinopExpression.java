@@ -8,9 +8,7 @@ import main.java.jdr299zdh5cew256ans96.ir.IRESeq;
 import main.java.jdr299zdh5cew256ans96.ir.IRExpr;
 import main.java.jdr299zdh5cew256ans96.ir.IRJump;
 import main.java.jdr299zdh5cew256ans96.ir.IRLabel;
-import main.java.jdr299zdh5cew256ans96.ir.IRMem;
 import main.java.jdr299zdh5cew256ans96.ir.IRMove;
-import main.java.jdr299zdh5cew256ans96.ir.IRName;
 import main.java.jdr299zdh5cew256ans96.ir.IRNodeFactory;
 import main.java.jdr299zdh5cew256ans96.ir.IRStmt;
 import main.java.jdr299zdh5cew256ans96.ir.IRTemp;
@@ -25,7 +23,6 @@ import main.java.jdr299zdh5cew256ans96.util.edu.cornell.cs.cs4120.util.CodeWrite
 import java.util.ArrayList;
 import java.math.BigInteger;
 import java.util.Arrays;
-import java.util.EnumSet;
 
 /**
  * AST Node for the Binary operator expression. It can be used anywhere
@@ -364,11 +361,8 @@ public class BinopExpression extends Expression {
                                         factory.IRSeq(moveStmts),
                                 arrayPtr);
 
-                        // TODO: global arrays are currently overwriting each other
-                        // so we can currently only have one at a time
                 } else if (e instanceof Identifier) {
                         Identifier id = (Identifier) e;
-                        // TODO: Try creating a new array here?
                         // global identifiers point to address where
                         // corresponding value is stored
                         if (id.global()) {
@@ -387,20 +381,6 @@ public class BinopExpression extends Expression {
                                                 movePtrToTemp,
                                                 tempPtr);
                         }
-
-//                        ArrayList<IRStmt> stmts = new ArrayList<>();
-//                        IRExpr translate = e.translate(factory);
-//                        if (translate instanceof IRName name) {
-//                                translate = factory.generateFreshTemp();
-//                                IRExpr globalPtr = factory.IRBinOp(
-//                                                IRBinOp.OpType.ADD,
-//                                                name,
-//                                                factory.IRConst(0));
-//                                IRMove movePtrToTemp = factory.IRMove(
-//                                                translate,
-//                                                globalPtr);
-//                                stmts.add(movePtrToTemp);
-//                        }
 
                         return factory.IRESeq(
                                         factory.IRSeq(),
@@ -472,7 +452,7 @@ public class BinopExpression extends Expression {
                 // equivalent to !rightIRExpr
                 IRExpr invertedRightIRExpr = factory.IRBinOp(IRBinOp.OpType.XOR, factory.IRConst(1), rightIRExpr);
 
-                if (Arrays.asList(cli.turnedOnOpts).contains("cf")) {
+                if (Arrays.asList(cli.enabledOptimizations).contains("cf")) {
                         if (leftIRExpr.isConstant() && rightIRExpr.isConstant()) {
                                 long leftConst = leftIRExpr.constant();
                                 long rightConst = rightIRExpr.constant();

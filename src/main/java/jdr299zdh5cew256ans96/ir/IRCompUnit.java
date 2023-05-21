@@ -1,7 +1,6 @@
 package main.java.jdr299zdh5cew256ans96.ir;
 
 import main.java.jdr299zdh5cew256ans96.assembly.Assembly;
-import main.java.jdr299zdh5cew256ans96.assembly.Directive;
 import main.java.jdr299zdh5cew256ans96.assembly.GloblDirective;
 import main.java.jdr299zdh5cew256ans96.assembly.TypeDirective;
 import main.java.jdr299zdh5cew256ans96.assembly.IntelSyntaxDirective;
@@ -12,7 +11,6 @@ import main.java.jdr299zdh5cew256ans96.assembly.Global;
 import main.java.jdr299zdh5cew256ans96.assembly.Label;
 import main.java.jdr299zdh5cew256ans96.ir.visit.AggregateVisitor;
 import main.java.jdr299zdh5cew256ans96.ir.visit.IRVisitor;
-import main.java.jdr299zdh5cew256ans96.ir.BlockGraph;
 import main.java.jdr299zdh5cew256ans96.util.edu.cornell.cs.cs4120.util.CodeWriterSExpPrinter;
 import main.java.jdr299zdh5cew256ans96.cli;
 
@@ -190,7 +188,7 @@ public class IRCompUnit extends IRNode_c {
 
     public void optimizeIR(IRNodeFactory factory) {
 
-        if (Arrays.asList(cli.turnedOnOpts).contains("copy")) {
+        if (Arrays.asList(cli.enabledOptimizations).contains("copy")) {
             IRcfg.copyPropagation();
         }
 
@@ -199,7 +197,7 @@ public class IRCompUnit extends IRNode_c {
 
         }
 
-        if (Arrays.asList(cli.turnedOnOpts).contains("dce")) {
+        if (Arrays.asList(cli.enabledOptimizations).contains("dce")) {
             // System.out.println("Before dce: " + IRcfg.toString());
             IRcfg.deadCodeElimination();
             // System.out.println("After dce: " + IRcfg.toString());

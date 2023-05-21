@@ -8,13 +8,9 @@ import main.java.jdr299zdh5cew256ans96.ast.SemanticError;
 import main.java.jdr299zdh5cew256ans96.ast.Use;
 import main.java.jdr299zdh5cew256ans96.cup.parser;
 import main.java.jdr299zdh5cew256ans96.ir.IRCompUnit;
-import main.java.jdr299zdh5cew256ans96.ir.IRName;
 import main.java.jdr299zdh5cew256ans96.ir.IRNodeFactory;
 import main.java.jdr299zdh5cew256ans96.ir.IRNodeFactory_c;
-import main.java.jdr299zdh5cew256ans96.ir.IRSeq;
 import main.java.jdr299zdh5cew256ans96.ir.interpret.IRSimulator;
-import main.java.jdr299zdh5cew256ans96.ir.Graph;
-import main.java.jdr299zdh5cew256ans96.ir.BlockGraph;
 import main.java.jdr299zdh5cew256ans96.util.edu.cornell.cs.cs4120.util.CodeWriterSExpPrinter;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
@@ -363,7 +359,7 @@ public class HelperCli {
 				IRNodeFactory factory = new IRNodeFactory_c();
 
 				if (optirInitialFlag || optcfgInitialFlag) {
-					cli.turnedOnOpts = new String[cli.turnedOnOpts.length];
+					cli.enabledOptimizations = new String[cli.enabledOptimizations.length];
 					// IRNodeFactory factory = new IRNodeFactory_c();
 					// IRCompUnit initialIRRoot = program.translate(factory).lower(factory);
 					IRCompUnit initialIRRoot = loweredIRRoot;
@@ -392,7 +388,7 @@ public class HelperCli {
 				// System.out.println("\n\nAFTER OPT :\n" + loweredIRRoot.IRcfg().toString());
 
 				if (optirFinalFlag || optcfgFinalFlag) {
-					cli.turnedOnOpts = cli.supportedOpts;
+					cli.enabledOptimizations = cli.SUPPORTED_OPTIMIZATIONS;
 					// IRNodeFactory factory = new IRNodeFactory_c();
 					// IRCompUnit finalIRRoot = program.translate(factory).lower(factory);
 					IRCompUnit finalIRRoot = loweredIRRoot;

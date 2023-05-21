@@ -2,11 +2,8 @@ package main.java.jdr299zdh5cew256ans96.ir;
 
 import main.java.jdr299zdh5cew256ans96.assembly.Assembly;
 import main.java.jdr299zdh5cew256ans96.assembly.CallStack;
-import main.java.jdr299zdh5cew256ans96.assembly.Const;
 import main.java.jdr299zdh5cew256ans96.assembly.Enter;
 import main.java.jdr299zdh5cew256ans96.assembly.Instruction;
-import main.java.jdr299zdh5cew256ans96.assembly.Jmp;
-import main.java.jdr299zdh5cew256ans96.assembly.MemBinop;
 import main.java.jdr299zdh5cew256ans96.assembly.MemRegister;
 import main.java.jdr299zdh5cew256ans96.assembly.Mov;
 import main.java.jdr299zdh5cew256ans96.assembly.Register;
@@ -16,24 +13,12 @@ import main.java.jdr299zdh5cew256ans96.cli;
 import main.java.jdr299zdh5cew256ans96.ir.visit.AggregateVisitor;
 import main.java.jdr299zdh5cew256ans96.ir.visit.IRVisitor;
 import main.java.jdr299zdh5cew256ans96.ir.visit.InsnMapsBuilder;
-import main.java.jdr299zdh5cew256ans96.ir.Graph;
-import main.java.jdr299zdh5cew256ans96.ir.IRNodeFactory;
-import main.java.jdr299zdh5cew256ans96.ir.BlockGraph;
-import main.java.jdr299zdh5cew256ans96.ir.JumpMap;
-import main.java.jdr299zdh5cew256ans96.ir.LabelMap;
 import main.java.jdr299zdh5cew256ans96.util.edu.cornell.cs.cs4120.util.CodeWriterSExpPrinter;
 
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 import java.util.List;
-import java.util.LinkedHashSet;
-import java.util.Queue;
-import java.util.Set;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
 import java.util.Arrays;
 
 /** An IR function declaration */
@@ -193,7 +178,7 @@ public class IRFuncDecl extends IRNode_c {
         }
 
         Assembly newAsm;
-        if (Arrays.asList(cli.turnedOnOpts).contains("reg")) {
+        if (Arrays.asList(cli.enabledOptimizations).contains("reg")) {
             newAsm = RegisterAllocation.registerAllocate(abstractAssembly);
         } else {
             newAsm = RegisterAllocation.trivialAllocate(abstractAssembly);
@@ -206,7 +191,7 @@ public class IRFuncDecl extends IRNode_c {
             i++;
         }
 
-        if (Arrays.asList(cli.turnedOnOpts).contains("dce")) {
+        if (Arrays.asList(cli.enabledOptimizations).contains("dce")) {
             deadCodeElimination(newAsm);
         }
 
@@ -272,7 +257,7 @@ public class IRFuncDecl extends IRNode_c {
         // * (RegisterAllocation.TempList.size() + 1) : 8 *
         // RegisterAllocation.TempList.size();
         // System.out.println("numSpilled: " + numSpilled);
-        if (Arrays.asList(cli.turnedOnOpts).contains("reg")) {
+        if (Arrays.asList(cli.enabledOptimizations).contains("reg")) {
             return numSpilled % 2 != 0 ? 8
                     * (numSpilled + 1) : 8 * numSpilled;
         }
@@ -301,7 +286,7 @@ public class IRFuncDecl extends IRNode_c {
     }
 
     public void optimizeIR(IRNodeFactory factory) {
-        if (Arrays.asList(cli.turnedOnOpts).contains("dce")) {
+        if (Arrays.asList(cli.enabledOptimizations).contains("dce")) {
             IRcfg.deadCodeElimination();
             body = factory.IRSeq(IRcfg.flatten());
 

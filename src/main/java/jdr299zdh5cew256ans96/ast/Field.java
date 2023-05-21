@@ -2,12 +2,10 @@ package main.java.jdr299zdh5cew256ans96.ast;
 
 import main.java.jdr299zdh5cew256ans96.ir.IRExpr;
 import main.java.jdr299zdh5cew256ans96.ir.IRNodeFactory;
-import main.java.jdr299zdh5cew256ans96.types.RecordType;
 import main.java.jdr299zdh5cew256ans96.types.Type;
 import main.java.jdr299zdh5cew256ans96.util.edu.cornell.cs.cs4120.util.CodeWriterSExpPrinter;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 public class Field extends Expression {
 
